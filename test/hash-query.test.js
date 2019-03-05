@@ -1,14 +1,8 @@
 const test = QUnit.test;
 
-function writeSearchToQuery(existingQuery, searchTerm) {
-    const searchParams = new URLSearchParams(existingQuery);
-    searchParams.set('searchTerm', searchTerm);
-    searchParams.set('page', 1);
-
-    return searchParams.toString();
-}
-
 QUnit.module('hash');
+
+import { writeSearchToQuery } from '../src/hash-query.js';
 
 test('add search to empty hash', assert => {
     // arrange
@@ -30,12 +24,7 @@ test('change an existing query', assert => {
     assert.equal(result, 'searchTerm=harry+potter&page=1');
 });
 
-function writePageToQuery(existingQuery, page) {
-    const searchParams = new URLSearchParams(existingQuery);
-    searchParams.set('page', page);
-
-    return searchParams.toString();
-}   
+import { writePageToQuery } from '../src/hash-query.js';
 
 test('write page to existing query', assert => {
     //arrange
@@ -43,39 +32,34 @@ test('write page to existing query', assert => {
     const existingQuery = 'searchTerm=star+wars&page=6';
     //act
     const result = writePageToQuery(existingQuery, page);
-
     //assert
     assert.equal(result, 'searchTerm=star+wars&page=3');
 });
 
-function readFromQuery(query) {
-    const searchParams = new URLSearchParams(query);
-    const pageNumber = parseInt(searchParams.get('page')) || 1;
-    const result = {
-        searchTerm: searchParams.get('searchTerm'),
-        page: pageNumber
-    };
-    return result;
-}
+import { readFromQuery } from '../src/hash-query.js';
 
 test('reads options from query', assert => {
+    // arrange
     const query = 'searchTerm=star+wars&page=3';
     const expected = {
         searchTerm: 'star wars',
         page: 3
     };
+    // act
     const result = readFromQuery(query);
-
+    // assert
     assert.deepEqual(result, expected);
 });
 
 test('if query has no page then return page=1', assert => {
+    // arrange
     const query = 'searchTerm=star+wars';
     const expected = {
         searchTerm: 'star wars',
         page: 1
     };
+    // act
     const result = readFromQuery(query);
-
+    // assert
     assert.deepEqual(result, expected);
 });
