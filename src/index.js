@@ -1,4 +1,4 @@
-import { loadMovies } from './load-movie.js';
+// import { loadMovies } from './load-movie.js';
 import { updateSearchTerm } from './search-component.js';
 import { readFromQuery } from './hash-query.js';
 
