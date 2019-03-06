@@ -6,12 +6,24 @@ import updatePagingInfo from './paging-component.js';
 
 window.addEventListener('hashchange', loadQuery);
 
+const movieContainer = document.getElementById('movie-container');
+const promptContainer = document.getElementById('prompt-container');
+
 function loadQuery() {
     const query = window.location.hash.slice(1);
     const queryOptions = readFromQuery(query);
     updateSearchTerm(queryOptions.searchTerm);
     
     const url = makeSearchMovieUrl(queryOptions);
+
+    if(!url){
+        promptContainer.classList.remove('hidden');
+        movieContainer.classList.add('hidden');
+    }
+    else {
+        promptContainer.classList.add('hidden');
+        movieContainer.classList.remove('hidden');
+    }
     
     fetch(url)
         .then(response => response.json())
