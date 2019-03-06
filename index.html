@@ -21,15 +21,19 @@
             </form>
         </section>
         
-        <section id="pagination">
-            <button id="previous-button">Previous</button>
-            <p id="page-count">Page <span id="current-page">1</span> of <span id="total-pages">1</span></p>
-            <button id="next-button">Next</button>
+        <section id="pagination-container" class="hidden">
+            <div id="pagination">
+                <button id="previous-button">Previous</button>
+                <p id="page-count">Page <span id="current-page">1</span> of <span id="total-pages">1</span></p>
+                <button id="next-button">Next</button>
+            </div>
         </section>
 
         <p id="prompt-container">Search for a movie!</p>
-        
-        <section id="movie-container">
+
+        <section id="movie-container-container" class="hidden">
+            <div id="movie-container">
+            </div>
         </section>
 
     </main>
