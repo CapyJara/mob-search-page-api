@@ -9,15 +9,23 @@ let currentPageNumber = 1;
 
 previousButton.addEventListener('click', () => {
     currentPageNumber--;
-    updatePaging();
+    updateQuery();
 });
 
 nextButton.addEventListener('click', () => {
     currentPageNumber++;
-    updatePaging();
+    updateQuery();
 });
 
-export default function updatePaging() {
+export default function updatePagingInfo(pagingInfo) {
+    currentPageNumber = pagingInfo.page;
+    currentPage.textContent = currentPageNumber;
+    totalPages.textContent = pagingInfo.totalPages;
+    previousButton.disabled = currentPageNumber === 1;
+    nextButton.disabled = currentPageNumber === pagingInfo.totalPages;
+}
+
+function updateQuery() {
     const existingQuery = window.location.hash.slice(1);
     const newQuery = writePageToQuery(existingQuery, currentPageNumber);
     window.location.hash = newQuery;
