@@ -4,7 +4,9 @@ import { readFromQuery } from './hash-query.js';
 import makeSearchMovieUrl from './make-search-movie.js';
 import updatePagingInfo from './paging-component.js';
 
-window.addEventListener('hashchange', () => {
+window.addEventListener('hashchange', loadQuery);
+
+function loadQuery() {
     const query = window.location.hash.slice(1);
     const queryOptions = readFromQuery(query);
     updateSearchTerm(queryOptions.searchTerm);
@@ -21,4 +23,4 @@ window.addEventListener('hashchange', () => {
             };
             updatePagingInfo(pagingInfo);
         });
-});
+}
