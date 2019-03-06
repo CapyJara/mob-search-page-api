@@ -16,6 +16,11 @@ export default function movieTemplate(movie) {
 const movieContainer = document.getElementById('movie-container');
 
 export function loadMovies(allMovies) {
+    while(movieContainer.children.length > 0) {
+        movieContainer.lastElementChild.remove();
+    }
+
+
     allMovies.forEach(movie => {
         const dom = movieTemplate(movie);
         movieContainer.appendChild(dom);
